@@ -1,8 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Variables de colores personalizados */
+:root {
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --secondary: #4f46e5;
+  --secondary-hover: #4338ca;
+  --bg-dark: #0f172a;
+  --bg-card: #1e293b;
+  --text-bright: #f8fafc;
+}
+
+/* Estilos base */
 body {
+  background-color: var(--bg-dark);
+  color: var(--text-bright);
+  font-family: 'Inter', sans-serif;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,4 +26,222 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Animaciones y efectos */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.5); }
+  50% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.8); }
+}
+
+/* Clases personalizadas */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s infinite ease-in-out;
+}
+
+.animate-glow {
+  animation: glow 2s infinite ease-in-out;
+}
+
+.glass-effect {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Mejoras de los formularios */
+.form-input {
+  @apply bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 w-full text-gray-100 
+         focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+         transition-all duration-300 outline-none;
+}
+
+.form-label {
+  @apply block text-gray-300 mb-2 text-sm font-medium;
+}
+
+.form-group {
+  @apply mb-4;
+}
+
+.btn-primary {
+  @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg
+         transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg;
+}
+
+.btn-secondary {
+  @apply bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-lg
+         transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg;
+}
+
+.btn-danger {
+  @apply bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg
+         transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg;
+}
+
+/* Estilos para el modal */
+.modal-backdrop {
+  @apply fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50
+         backdrop-blur-sm transition-all duration-300;
+}
+
+.modal-content {
+  @apply bg-gray-800 rounded-xl p-6 max-w-2xl w-11/12 max-h-[90vh] overflow-auto
+         border border-gray-700 shadow-2xl transform transition-all duration-500;
+  animation: modalOpen 0.4s ease-out forwards;
+}
+
+@keyframes modalOpen {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Mejoras para cards */
+.zelda-card {
+  @apply bg-gray-800 rounded-xl overflow-hidden transition-all duration-300
+         hover:shadow-xl hover:shadow-blue-900/20 border border-gray-700;
+  transform: translateZ(0);
+}
+
+.zelda-card:hover {
+  transform: translateY(-5px) translateZ(0);
+}
+
+.zelda-card-image {
+  @apply h-48 overflow-hidden relative;
+}
+
+.zelda-card-image img {
+  @apply w-full h-full object-cover transition-transform duration-700;
+}
+
+.zelda-card:hover .zelda-card-image img {
+  transform: scale(1.1);
+}
+
+.zelda-card-content {
+  @apply p-5;
+}
+
+/* Estilos para las tarjetas de materiales y monstruos */
+.material-card, .monster-card {
+  @apply bg-gray-800 rounded-lg overflow-hidden shadow-md border border-gray-700 
+         transition-transform duration-300 hover:shadow-lg hover:shadow-blue-500/20;
+  transform: translateZ(0);
+}
+
+.material-card:hover, .monster-card:hover {
+  transform: translateY(-5px);
+}
+
+.material-card-content, .monster-card-content {
+  @apply p-4 text-center;
+}
+
+.material-card-title, .monster-card-title {
+  @apply text-lg font-bold text-blue-400 mb-2;
+}
+
+.material-card-description, .monster-card-description {
+  @apply text-sm text-gray-400;
+}
+
+.material-card-image, .monster-card-image {
+  @apply w-full h-48 bg-gray-700 flex items-center justify-center overflow-hidden;
+}
+
+.material-card-image img, .monster-card-image img {
+  @apply w-full h-full object-cover transition-transform duration-500;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}
+
+/* Efectos de tarjetas con glassmorphism */
+.card-glass {
+  background: rgba(31, 41, 55, 0.7); /* bg-gray-800 con transparencia */
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Efectos de neón para resaltar elementos importantes */
+.neon-blue {
+  text-shadow: 0 0 5px #60a5fa, 0 0 10px #3b82f6, 0 0 20px #2563eb;
+}
+
+.neon-border {
+  box-shadow: 0 0 5px #60a5fa, 0 0 10px #3b82f6;
+}
+
+/* Animaciones de hover mejoradas */
+.hover-grow {
+  transition: all 0.3s;
+}
+
+.hover-grow:hover {
+  transform: scale(1.05);
+  z-index: 1;
+}
+
+/* Mejoras para imágenes de baja resolución */
+.image-rendering-smooth {
+  image-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  transform: translateZ(0);
+}
+
+/* Mejoras para el contenedor de imágenes */
+.img-container {
+  position: relative;
+  overflow: hidden;
+  background-color: #1f2937;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Difuminar bordes para imágenes pequeñas */
+.img-container img.pixelated {
+  filter: brightness(1.05) contrast(0.95);
+  transform: scale(0.98);
+}
+
+/* Ajustar el hover de imágenes para que sea más suave */
+.img-hover-zoom:hover img {
+  transform: scale(1.05);
+  transition: transform 0.4s ease-in-out;
+}
+
+/* Sombreado de imagen para mejorar calidad aparente */
+.image-shadow {
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
 }
